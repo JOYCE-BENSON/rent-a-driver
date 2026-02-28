@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine
 from app import models
+from app.routers import auth
 
 app = FastAPI(title="Rent-A-Driver API", version="1.0.0")
 
@@ -16,6 +17,9 @@ app.add_middleware(
 
 # Create all database tables automatically
 models.User.metadata.create_all(bind=engine)
+
+# Register routers
+app.include_router(auth.router)
 
 @app.get("/")
 def root():
