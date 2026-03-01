@@ -9,11 +9,12 @@ function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+ const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await login({ email, password });
       localStorage.setItem('token', response.data.access_token);
+      localStorage.setItem('userId', 1);
       navigate('/dashboard');
     } catch (err) {
       setError('Invalid email or password');
