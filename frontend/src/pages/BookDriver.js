@@ -25,7 +25,10 @@ function BookDriver() {
       return;
     }
     try {
-      await createBooking({ driver_id: parseInt(driverId), date, hours: parseInt(hours), location }, userId);
+      await createBooking(
+        { driver_id: parseInt(driverId), date, hours: parseInt(hours), location },
+        userId
+      );
       setSuccess(true);
       setTimeout(() => navigate('/dashboard'), 2000);
     } catch (err) {
@@ -33,64 +36,82 @@ function BookDriver() {
     }
   };
 
-  if (!driver) return <div className="text-center mt-20">Loading...</div>;
+  if (!driver) return (
+    <div className="bg-gray-950 min-h-screen flex items-center justify-center">
+      <p className="text-yellow-400 text-xl">Loading...</p>
+    </div>
+  );
 
   return (
-    <div>
+    <div className="bg-gray-950 min-h-screen text-white">
       <Navbar />
       <div className="max-w-2xl mx-auto px-6 py-12">
-        <h1 className="text-3xl font-bold mb-2">Book {driver.name}</h1>
-        <p className="text-gray-600 mb-8">KSh {driver.price_per_hour}/hr · {driver.experience} years experience</p>
+        <p className="text-yellow-400 font-bold uppercase tracking-widest mb-2 text-sm">Book a Driver</p>
+        <h1 className="text-3xl font-bold mb-1">{driver.name}</h1>
+        <p className="text-gray-400 mb-8">
+          ⭐ {driver.rating} rating · 🕒 {driver.experience} years experience · 
+          <span className="text-yellow-400 font-bold"> KSh {driver.price_per_hour}/hr</span>
+        </p>
 
         {success && (
-          <div className="bg-green-100 text-green-700 p-4 rounded mb-6">
-            Booking successful! Redirecting to dashboard...
+          <div className="bg-green-900 border border-green-700 text-green-400 p-4 rounded-lg mb-6">
+            🎉 Booking successful! Redirecting to dashboard...
           </div>
         )}
-        {error && <p className="text-red-500 mb-4">{error}</p>}
+        {error && (
+          <div className="bg-red-900 border border-red-700 text-red-400 p-4 rounded-lg mb-6">
+            {error}
+          </div>
+        )}
 
-        <form onSubmit={handleBooking} className="bg-white p-6 rounded-lg shadow-md">
+        <form onSubmit={handleBooking} className="bg-gray-900 border border-gray-800 p-6 rounded-2xl">
           <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Date</label>
+            <label className="block text-gray-400 font-semibold mb-2">Date</label>
             <input
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-yellow-400"
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400 transition"
               required
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Hours</label>
+            <label className="block text-gray-400 font-semibold mb-2">Number of Hours</label>
             <input
               type="number"
               min="1"
               max="12"
               value={hours}
               onChange={(e) => setHours(e.target.value)}
-              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-yellow-400"
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400 transition"
               required
             />
           </div>
           <div className="mb-6">
-            <label className="block text-gray-700 font-semibold mb-2">Pickup Location</label>
+            <label className="block text-gray-400 font-semibold mb-2">Pickup Location</label>
             <input
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:border-yellow-400"
-              placeholder="e.g. Nairobi CBD"
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-yellow-400 transition"
+              placeholder="e.g. Nairobi CBD, Westlands"
               required
             />
           </div>
-          <div className="bg-gray-50 p-4 rounded mb-6">
-            <p className="font-semibold">Total: KSh {driver.price_per_hour * hours}</p>
+
+          {/* Total price calculator */}
+          <div className="bg-gray-800 border border-yellow-400 p-4 rounded-lg mb-6">
+            <div className="flex justify-between items-center">
+              <p className="text-gray-400">KSh {driver.price_per_hour} × {hours} hours</p>
+              <p className="text-yellow-400 font-bold text-xl">KSh {driver.price_per_hour * hours}</p>
+            </div>
           </div>
+
           <button
             type="submit"
-            className="w-full bg-yellow-400 text-black font-bold py-3 rounded hover:bg-yellow-300 transition"
+            className="w-full bg-yellow-400 text-black font-bold py-3 rounded-lg hover:bg-yellow-300 transition"
           >
-            Confirm Booking
+            Confirm Booking →
           </button>
         </form>
       </div>
