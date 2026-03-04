@@ -6,6 +6,7 @@ import Signup from './pages/Signup';
 import Drivers from './pages/Drivers';
 import BookDriver from './pages/BookDriver';
 import Dashboard from './pages/Dashboard';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/drivers" element={<Drivers />} />
           <Route path="/book/:driverId" element={<BookDriver />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>

@@ -29,7 +29,9 @@ function Dashboard() {
         <p className="text-yellow-400 font-bold uppercase tracking-widest mb-2">Welcome Back</p>
         <h1 className="text-3xl font-bold mb-8">My Bookings</h1>
         {loading ? (
-          <p className="text-center text-gray-500">Loading bookings...</p>
+          <div className="flex justify-center items-center py-20">
+  <div className="w-12 h-12 border-4 border-gray-700 border-t-yellow-400 rounded-full animate-spin"></div>
+</div>
         ) : bookings.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-gray-500 text-xl mb-4">No bookings yet!</p>

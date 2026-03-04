@@ -25,7 +25,9 @@ function Drivers() {
         <h1 className="text-3xl font-bold mb-2">Available Drivers</h1>
         <p className="text-gray-400 mb-8">All our drivers are verified, professional and highly rated</p>
         {loading ? (
-          <p className="text-center text-gray-500">Loading drivers...</p>
+          <div className="flex justify-center items-center py-20">
+  <div className="w-12 h-12 border-4 border-gray-700 border-t-yellow-400 rounded-full animate-spin"></div>
+</div>
         ) : drivers.length === 0 ? (
           <p className="text-center text-gray-500">No drivers available at the moment.</p>
         ) : (
