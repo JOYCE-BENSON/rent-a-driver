@@ -6,19 +6,16 @@ from app.routers import auth, drivers, bookings, users
 
 app = FastAPI(title="Rent-A-Driver API", version="1.0.0")
 
-# Allow React frontend to talk to this API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Create all database tables automatically
 models.User.metadata.create_all(bind=engine)
 
-# Register routers
 app.include_router(auth.router)
 app.include_router(drivers.router)
 app.include_router(bookings.router)
