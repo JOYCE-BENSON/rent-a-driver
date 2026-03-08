@@ -2,6 +2,10 @@
 
 > Your Car. Our Driver. Your Freedom.
 
+🌐 **Live Demo:** [https://rent-a-driver.vercel.app](https://rent-a-driver.vercel.app)
+
+🔧 **API Docs:** [https://rent-a-driver-backend.onrender.com/docs](https://rent-a-driver-backend.onrender.com/docs)
+
 A full-stack web application that connects customers with professional drivers in Nairobi. Built as a portfolio project to demonstrate full-stack development skills.
 
 ![RentADriver](frontend/src/assets/range-rover.jpg)
